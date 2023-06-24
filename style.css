@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    user-select: none;
+    width: 300px;
+    height: 400px;
+
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+.calculator > .container {
+    width: 100%;
+    height: 100%;
+
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.calculator > .container > .name {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.calculator > .container > .name > .model {
+    text-align: center;
+}
+
+.calculator > .container > .display {
+    width: 100%;
+    height: 75px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.calculator > .container > .buttons {
+    margin-top: 20px;
+}
+
+.calculator > .container > .buttons .button {
+    border: 1px solid black;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 30px;
+}
+
+.calculator > .container > .buttons > .top {
+    margin-top: 10px;
+}
+
+.calculator > .container > .buttons > .top > .functions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 7px 0;
+}
+
+.calculator > .container > .buttons > .bottom {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.calculator > .container > .buttons > .bottom > .numbers {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 7px;
+}
+
+.calculator > .container > .buttons > .bottom > .operators {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
