@@ -50,6 +50,14 @@ class BasicMath {
 
 
 class Calculator extends BasicMath {
+
+    /*
+        TODO:
+            Add max length of numbers user can enter
+            Add decimal numbers
+            Round result like: 3.(3) => 10 / 3
+     */
+
     constructor() {
         super();
         this.number1 = null;
