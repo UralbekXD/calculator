@@ -12,27 +12,46 @@ class BasicCalculator {
     constructor() {
         this.number1 = null;
         this.number2 = null;
+        this.operator = null;
         this.result = 0;
     }
 
-    add() {
-        this.result = this.number1 + this.number2;
+    add(number1, number2) {
+        return number1 + number2;
     }
 
-    subtract() {
-        this.result = this.number1 - this.number2;
+    subtract(number1, number2) {
+        return number1 - number2;
     }
 
-    multiply() {
-        this.result = this.number1 * this.number2;
+    multiply(number1, number2) {
+        return number1 * number2;
     }
 
-    divide() {
+    divide(number1, number2) {
         if (this.number2 > 0) {
-            this.result = this.number1 / this.number2;
+            return number1 / number2;
         }
 
         throw new Error('Division by zero!');
+    }
+
+    decideThenOperate(operator, number1, number2) {
+        switch (operator) {
+            case Operators.Add:
+                return this.add(number1, number2);
+            case Operators.Subtract:
+                return this.subtract(number1, number2);
+            case Operators.Multiply:
+                return this.multiply(number1, number2);
+            case Operators.Divide:
+                try {
+                    return this.divide(number1, number2);
+                } catch (e) {
+                    console.error(e);
+                    return "Error";
+                }
+        }
     }
 }
 
@@ -41,7 +60,6 @@ class Calculator extends BasicCalculator {
     constructor() {
         super();
         this.turn = "left";
-        this.operator = null;
         this.display = document.querySelector(".display");
         this.numbers = document.querySelectorAll(".number");
         this.operators = document.querySelectorAll(".operator");
@@ -58,6 +76,15 @@ class Calculator extends BasicCalculator {
         this.display.textContent += e.target.textContent;
     }
 
+    clear() {
+        this.display.textContent = "";
+        this.turn = "left";
+        this.number1 = null;
+        this.number2 = null;
+        this.result = 0;
+        this.operator = null;
+    }
+
     clearDisplay() {
         this.display.textContent = "";
     }
@@ -71,13 +98,21 @@ class Calculator extends BasicCalculator {
     }
 
     setOperator(e) {
-        this.operator = e.target.textContent;
         if (this.turn === "left") {
+            this.operator = e.target.textContent;
             this.number1 = this.getDisplayValueInNumber();
             this.clearDisplay();
-        }
+            this.switchTurn();
+        } else {
+            this.number1 = this.decideThenOperate(
+                this.operator,
+                this.number1,
+                this.getDisplayValueInNumber(),
+            );
 
-        this.switchTurn();
+            this.operator = e.target.textContent;
+            this.clearDisplay();
+        }
     }
 
     setResult() {
@@ -91,31 +126,11 @@ class Calculator extends BasicCalculator {
             this.switchTurn();
         }
 
-        switch (this.operator) {
-            case Operators.Add:
-                this.add(this.number1, this.number2);
-                break;
-            case Operators.Subtract:
-                this.subtract(this.number1, this.number2);
-                break;
-            case Operators.Multiply:
-                this.multiply(this.number1, this.number2);
-                break;
-            case Operators.Divide:
-                try {
-                    this.divide(this.number1, this.number2);
-                } catch (e) {
-                    console.error(e);
-                    this.result = "Error";
-                }
-                break;
-        }
-
+        this.result = this.decideThenOperate(this.operator, this.number1, this.number2);
         this.setResult();
     }
 
     init() {
-        console.log(this.display);
         this.numbers.forEach((numberButton) => {
             numberButton.addEventListener("click", (e) => this.setDisplay(e));
         });
@@ -125,7 +140,7 @@ class Calculator extends BasicCalculator {
         })
 
         this.equalButton.addEventListener("click", (e) => this.operate(e));
-        this.clearButton.addEventListener("click", () => this.clearDisplay());
+        this.clearButton.addEventListener("click", () => this.clear());
     }
 }
 
