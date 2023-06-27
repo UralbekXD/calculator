@@ -102,7 +102,7 @@ body {
 .calculator > .container > .buttons .button.orange {
     background: orange;
     border: 2px solid #de9412;
-    box-shadow: 0 2px #c0841b;
+    box-shadow: 0 3px #c0841b;
 }
 
 .calculator > .container .buttons .button.orange:active {
