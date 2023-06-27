@@ -8,14 +8,7 @@ const Operators = Object.freeze({
     Power: "<span>x<sup>y</sup></span>",
 });
 
-class BasicCalculator {
-    constructor() {
-        this.number1 = null;
-        this.number2 = null;
-        this.operator = null;
-        this.result = 0;
-    }
-
+class BasicMath {
     add(number1, number2) {
         return number1 + number2;
     }
@@ -56,9 +49,13 @@ class BasicCalculator {
 }
 
 
-class Calculator extends BasicCalculator {
+class Calculator extends BasicMath {
     constructor() {
         super();
+        this.number1 = null;
+        this.number2 = null;
+        this.operator = null;
+        this.result = 0;
         this.turn = "left";
         this.display = document.querySelector(".display");
         this.numbers = document.querySelectorAll(".number");
