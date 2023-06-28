@@ -22,7 +22,7 @@ class BasicMath {
     }
 
     divide(number1, number2) {
-        if (this.number2 > 0) {
+        if (number2 > 0) {
             return number1 / number2;
         }
 
@@ -53,7 +53,6 @@ class Calculator extends BasicMath {
 
     /*
         TODO:
-            Add max length of numbers user can enter
             Add decimal numbers
             Round result like: 3.(3) => 10 / 3
      */
@@ -78,7 +77,9 @@ class Calculator extends BasicMath {
     }
 
     setDisplay(e) {
-        this.display.textContent += e.target.textContent;
+        if (this.display.textContent.length <= 8) {
+            this.display.textContent += e.target.textContent;
+        }
     }
 
     clear() {
@@ -122,7 +123,11 @@ class Calculator extends BasicMath {
 
     setResult() {
         this.clearDisplay();
-        this.display.textContent = this.result;
+        if (this.result % 1 === 0) {
+            this.display.textContent = this.result
+        } else {
+            this.display.textContent = this.result.toFixed(2).toString();
+        }
     }
 
     operate(e) {
